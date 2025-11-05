@@ -21,3 +21,14 @@ export interface CardGridProps {
     items: NewsItem[];
     compact?: boolean;
 }
+
+export interface User {
+    id: string | number;
+    name: string;
+    email: string;
+    phone: string;
+    company?: {
+        name: string;
+        catchPhrase: string;
+    };
+}
