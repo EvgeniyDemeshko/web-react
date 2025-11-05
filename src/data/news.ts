@@ -1,4 +1,6 @@
-export const NEWS = [
+import { NewsItem } from '../types';
+
+export const NEWS: NewsItem[] = [
     {
         id: '1',
         title: 'Старт на React+Vite',

@@ -1,6 +1,7 @@
-import Card from './Card.jsx'
+import Card from './Card'
+import { CardGridProps } from '../types';
 
-export default function CardGrid({ items, compact=false }) {
+export default function CardGrid({ items, compact = false }: CardGridProps) {
     const cls = compact ? 'card-grid card-grid--compact' : 'cards'
     return (
         <>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import {NEWS} from '../data/news.js'
-import Toggle from '../components/Toggle.jsx'
-import CardGrid from '../components/CardGrid.jsx'
+import {NEWS} from '../data/news'
+import Toggle from '../components/Toggle'
+import CardGrid from '../components/CardGrid'
 
 export default function Home() {
     const [compact, setCompact] = useState(false)
@@ -12,7 +12,7 @@ export default function Home() {
         marginBottom: '1rem',
         gap: '1rem',
         flexWrap: 'wrap'
-    };
+    } as const;
     return (
         <>
             <div style={styles}>
@@ -21,8 +21,8 @@ export default function Home() {
                 <Toggle 
                     pressed={compact} 
                     onToggle={setCompact} 
-                    onLabel="Compact: увімкнено" 
-                    offLabel="Compact: вимкнено"
+                    onlabel="Compact: увімкнено" 
+                    offlabel="Compact: вимкнено"
                 />
             </div>
             <CardGrid items={NEWS} compact={compact}/>
