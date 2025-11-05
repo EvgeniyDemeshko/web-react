@@ -1,4 +1,6 @@
-export default function Toggle({ pressed, onToggle, onlabel='Compact ON', offlabel='Compact OFF' }) {
+import { ToggleProps } from '../types';
+
+export default function Toggle({ pressed, onToggle, onlabel = 'Compact ON', offlabel = 'Compact OFF' }: ToggleProps) {
     return (
         <div className="toggle">
             <span>{pressed ? offlabel : onlabel}</span>

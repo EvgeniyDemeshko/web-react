@@ -1,4 +1,6 @@
-export default function Card({ item }) {
+import { CardProps } from '../types';
+
+export default function Card({ item }: CardProps) {
     return (
         <article className="card">
             <img className="card__media" src={item.img} alt="" loading="lazy" />
