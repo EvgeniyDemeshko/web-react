@@ -16,7 +16,7 @@ export default function Header({onNavigate}: HeaderProps) {
     return (
         <header className="header">
             <div className="header__inner">
-                <h1 style={{margin: 0, color: 'var(--brand)'}}>Лабораторна робота № 10</h1>
+                <h1 style={{margin: 0, color: 'var(--brand)'}}>Лабораторна робота № 11</h1>
             </div>
             <nav className="nav" aria-label="Головна навігація">
                 <a className="nav__link" href="#" onClick={(e) => go(e, 'home')}>Головна</a>
