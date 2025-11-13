@@ -21,7 +21,7 @@ export default function Header({onNavigate}: HeaderProps) {
             <nav className="nav" aria-label="Головна навігація">
                 <a className="nav__link" href="#" onClick={(e) => go(e, 'home')}>Головна</a>
                 <a className="nav__link" href="#" onClick={(e) => go(e, 'about')}>Про нас</a>
-                <a className="nav__link" href="#">Контакти</a>
+                <a className="nav__link" href="#" onClick={(e) => go(e, 'contacts')}>Контакти</a>
                 <div className="flex ml-auto gap-0.5">
                     <button
                         type="button"
