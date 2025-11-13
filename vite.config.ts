@@ -4,7 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 import { fileURLToPath, URL } from 'node:url'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
@@ -12,4 +11,14 @@ export default defineConfig({
       "@": path.resolve(path.dirname(fileURLToPath(import.meta.url)), "./src"),
     },
   },
+  server:{
+    proxy:{
+      '/echo': {
+        target: 'https://postman-echo.com',
+        changeOrigin: true,
+        secure: true,
+        rewrite: (p) => p.replace(/^\/echo/, '')
+      }
+    }
+  }
 })
