@@ -1,8 +1,11 @@
+import { useNavigateCountdown } from "@/hooks/useNavigateCoutdown";
 import { useState } from "react";
 
 export default function ContactFormBasic() {
     const [status, setStatus] = useState('idle');
     const [error, setError] = useState('');
+
+    const { startCountdown } = useNavigateCountdown();
 
     const endpoint = '/echo/post';
 
@@ -26,6 +29,11 @@ export default function ContactFormBasic() {
             console.log("Success:", json);
             setStatus('success');
             form.reset();
+
+            startCountdown(5, "/", {
+                replace: true,
+                state: { from: "contact-success" },
+            });
 
         } catch (err) {
             const message = err instanceof Error ? err.message : 'Network error';
