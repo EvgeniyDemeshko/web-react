@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { User } from "../types/index";
-import { useFetchEmployees } from "../hooks/useFetchEmployees";
 import EmployeeCard from "../components/EmployeeCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEmployees } from "@/features/employees/employeesThunk";
