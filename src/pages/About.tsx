@@ -1,24 +1,37 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { User } from "../types/index";
 import { useFetchEmployees } from "../hooks/useFetchEmployees";
 import EmployeeCard from "../components/EmployeeCard";
-
-const ENDPOINT = 'https://jsonplaceholder.typicode.com/users';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEmployees } from "@/features/employees/employeesThunk";
 
 export default function About() {
-    const { data, loading, error } = useFetchEmployees(ENDPOINT);
+    const dispatch = useDispatch();
+    const { items, status, error } = useSelector((state: any) => state.employees);
     const [q, setQ] = useState('');
 
+    useEffect(() => {
+        if (status === 'idle') {
+            dispatch(fetchEmployees() as any);
+        }
+    }, [dispatch]);
+
     const list = useMemo(() => {
-        const items = Array.isArray(data) ? data as User[] : [];
+        const data = Array.isArray(items) ? items as User[] : [];
 
         if (!q) return items;
         const n = q.toLowerCase();
-        return items.filter(u => 
-            u.name.toLowerCase().includes(n) ||
-            (u.company?.name || '').toLowerCase().includes(n)
+        return data.filter(
+            (u) =>
+                u.name.toLowerCase().includes(n) ||
+                (u.company?.name || '').toLowerCase().includes(n)
         );
-    }, [data, q]);
+    }, [items, q]);
+
+    const loading = status === 'loading';
+    const hasError = status === 'failed' && error;
+    const noData =
+        status === 'succeeded' && Array.isArray(list) && list.length === 0;
 
     return (
         <>
@@ -39,14 +52,20 @@ export default function About() {
             </div>
 
             {loading && <p>Завантаження…</p>}
-            {!loading && error && (
-                <div style={{ border: '1px solid var(--border)', padding: '1rem', borderRadius: '8px' }}>
+            {!loading && hasError && (
+                <div
+                    style={{
+                        border: '1px solid var(--border)',
+                        padding: '1rem',
+                        borderRadius: '8px',
+                    }}
+                >
                     Помилка: {error}
                 </div>
             )}
-            {!loading && !error && Array.isArray(list) && list.length === 0 && <p>Даних немає</p>}
+            {!loading && !hasError && noData && <p>Даних немає</p>}
 
-            {!loading && !error && Array.isArray(list) && list.length > 0 && (
+            {!loading && !hasError && Array.isArray(list) && list.length > 0 && (
                 <div className="cards">
                     {list.map((u) => (
                         <EmployeeCard key={u.id} user={u} />

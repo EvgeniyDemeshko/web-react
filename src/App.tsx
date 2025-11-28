@@ -1,24 +1,23 @@
-import Header from './components/Header';
-import Sidenav from './components/Sidenav';
-import Footer from './components/Footer';
 import Home from './pages/Home';
-import { useState } from 'react';
 import About from './pages/About';
+import Contacts from './pages/Constacts';
+import NotFound from './pages/NotFound';
+import { Route, Routes } from 'react-router';
+import { RootLayout } from './layout/RootLayout';
+
 
 
 function App() {
-  const [page, setPage] = useState('home');
 
   return (
-    <div className='layout'>
-      <Header onNavigate={setPage} />
-      <Sidenav/>
-      <main className="main">
-        {page === 'home' && <Home />}
-        {page === 'about' && <About />}
-      </main>
-      <Footer/>
-    </div>
+    <Routes>
+      <Route path="/" element={<RootLayout/>}>
+        <Route index element={<Home />}/>
+        <Route path="/about" element={<About />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   )
 }
 
